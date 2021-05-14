@@ -47,13 +47,13 @@ exports.videoUpload = asyncHandler(async (req, res, next) => {
     await videoModel.remove()
     return next(new ErrorResponse(`Please upload a video`, 404))
   }
-  console.log(video.size, process.env.MAX_FILE_UPLOAD * 5)
-  if (video.size > process.env.MAX_FILE_UPLOAD * 5) {
+  console.log(video.size, process.env.MAX_FILE_UPLOAD * 5000)
+  if (video.size > process.env.MAX_FILE_UPLOAD * 5000) {
     await videoModel.remove()
     return next(
       new ErrorResponse(
         `Please upload a video less than ${
-          (process.env.MAX_FILE_UPLOAD * 5) / 1000 / 1000
+          (process.env.MAX_FILE_UPLOAD * 5000) / 1000 / 1000
         }mb`,
         404
       )
